@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <style>
+            div.a {
+            outline-color: 1px solid black;
+            }
+            table{
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <button type="button" onclick="addNewTask();">Nueva tarea</button>
+    <div>
+        <table id="myTasks">
+            <tr><td><div class="a" contenteditable>Tarea de ejemplo</div></td><td><input type="checkbox"></td></tr>
+        </table>
+    </div>
+    <script>
+        function addNewTask(){
+            let table = document.getElementById("myTasks");
+            let newRow = table.insertRow(-1);
+            let activity = newRow.insertCell(0);
+            let status = newRow.insertCell(1);
+            activity.innerHTML = '<div contenteditable> </div>';
+            status.innerHTML = '<input type ="checkbox"/>';
+        }
+    </script>
+</html>
