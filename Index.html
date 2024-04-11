@@ -10,6 +10,7 @@
         </style>
     </head>
     <button type="button" onclick="addNewTask();">Nueva tarea</button>
+    <button type="button" onclick="deleteDone();">Borrar Completas</button>
     <div>
         <table id="myTasks">
             <tr><td><div class="a" contenteditable>Ejemplo</div></td><td><input type="checkbox"></td></tr>
@@ -18,11 +19,23 @@
     <script>
         function addNewTask(){
             let table = document.getElementById("myTasks");
+            let rows = table.rows;
             let newRow = table.insertRow(-1);
             let activity = newRow.insertCell(0);
             let status = newRow.insertCell(1);
+            let dynamicId = table.rows.length -1;
             activity.innerHTML = '<div contenteditable> </div>';
-            status.innerHTML = '<input type ="checkbox"/>';
+            status.innerHTML = '<input type ="checkbox" id="chk'+dynamicId+'"/>';
+        }
+        function deleteDone(){
+            let table = document.getElementById("myTasks");
+            let rows = table.rows;
+            for(let i = 0; i < rows.length; i++){
+                console.log(rows[i].cells);
+                for(let x = 0; x < rows[i].cells.length; x++){
+                    console.log(rows[i].cells[x].innerHTML);
+                }
+            }
         }
     </script>
 </html>
