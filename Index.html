@@ -29,13 +29,33 @@
         }
         function deleteDone(){
             let table = document.getElementById("myTasks");
-            let rows = table.rows;
-            for(let i = 0; i < rows.length; i++){
-                console.log(rows[i].cells);
-                for(let x = 0; x < rows[i].cells.length; x++){
-                    console.log(rows[i].cells[x].innerHTML);
+            let checkedRows = [];
+        
+            for (let i = 0; i < table.rows.length; i++) {
+                let checkbox = table.rows[i].querySelector('input[type="checkbox"]');
+                if (checkbox.checked) {
+                    let activityCell = table.rows[i].cells[0];
+                    let activityValue = activityCell.querySelector('div').textContent;
+                    checkedRows.push({ activity: activityValue, rowId: i });
                 }
             }
+        
+            console.log(checkedRows);
+        
         }
+        function firstActions(){
+            document.getElementById('myTasks').addEventListener('change', function(event) {
+                if (event.target.type === 'checkbox') {
+                    let checkboxId = event.target.id;
+                    let dynamicId = checkboxId.substring(3); // Remove 'chk' prefix to get the dynamicId
+                    let row = event.target.closest('tr');
+                    let activityCell = row.cells[0];
+                    let activityValue = activityCell.querySelector('div').textContent;
+                    let checkboxValue = event.target.checked;
+                    console.log("Activity: " + activityValue + ", Checked: " + checkboxValue);
+                }
+            });
+        }
+        Window.onload = firstActions();
     </script>
 </html>
